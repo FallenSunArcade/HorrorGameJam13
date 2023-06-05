@@ -1,9 +1,7 @@
 Intermediate/*
-Plugins/*/Intermediate/*
 Saved/*
 DerivedDataCache/*
 Binaries/*
-Plugins/*/Binaries/*
 .vs/
 *.sln
 .idea/*
