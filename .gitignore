@@ -10,3 +10,8 @@ Platforms/*
 Build/
 Content/StarterContent/*
 Content/MetaHumans/*
+Content/FirstPerson/*
+Content/__ExternalActors__/*
+Content/__ExternalObjects__/*
+Content/FirstPersonArms/* 
+Content/LevelPrototyping/*
