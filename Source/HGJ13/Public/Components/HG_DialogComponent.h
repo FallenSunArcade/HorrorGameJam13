@@ -15,9 +15,10 @@ class HGJ13_API UHG_DialogComponent : public UActorComponent, public IHG_Interac
 
 public:
 	UHG_DialogComponent();
-	void OnInteraction_Implementation() override;
+	virtual void OnInteraction_Implementation() override;
 
 protected:
 	virtual void BeginPlay() override;
 	
 };
+
