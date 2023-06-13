@@ -6,23 +6,21 @@
 #include "GameFramework/Character.h"
 #include "HG_BaseCharacter.generated.h"
 
+class UHG_DialogComponent;
+
 UCLASS()
 class HGJ13_API AHG_BaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	AHG_BaseCharacter();
+	UHG_DialogComponent* GetDialogComponent() const {return DialogComponent;}
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+private:
+	UPROPERTY(EditAnywhere)
+	UHG_DialogComponent* DialogComponent;
 };
