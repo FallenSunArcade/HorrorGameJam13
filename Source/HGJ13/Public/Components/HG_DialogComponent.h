@@ -7,6 +7,8 @@
 #include "Interfaces/HG_Interactable.h"
 #include "HG_DialogComponent.generated.h"
 
+class AAIController;
+class UHG_HudOverlay;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class HGJ13_API UHG_DialogComponent : public UActorComponent, public IHG_Interactable
@@ -19,6 +21,15 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UHG_HudOverlay> HudOverlayClass;
 	
+	UPROPERTY()
+	AAIController* AIController;
+	
+	UPROPERTY()
+	UHG_HudOverlay* HudOverlay;
 };
 

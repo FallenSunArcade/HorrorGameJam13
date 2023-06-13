@@ -2,6 +2,9 @@
 
 
 #include "Controllers/HG_PlayerController.h"
+#include "Characters/HG_BaseCharacter.h"
+#include "Components/HG_DialogComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 AHG_PlayerController::AHG_PlayerController()
@@ -32,27 +35,25 @@ void AHG_PlayerController::Tick(float DeltaTime)
 
 void AHG_PlayerController::Interact()
 {
-	GEngine->AddOnScreenDebugMessage
-	(
-		1,
-		1.f,
-		FColor::Red,
-		FString::Printf(TEXT("Interact"))
-	);
-
 	FVector Location;
 	FRotator Rotation;
 	GetPlayerViewPoint(Location, Rotation);
 	FVector End = Location + Rotation.Vector() * 200;
 	
 	FCollisionQueryParams Params;
-	Params.AddIgnoredActor(this);
+	Params.AddIgnoredActor(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	FHitResult Hit;
 
 	DrawDebugLine(GetWorld(), Location, End, FColor::Red, true);
 	if(GetWorld()->LineTraceSingleByChannel(Hit, Location, End, ECC_GameTraceChannel1, Params))
 	{
-		
+		if(AHG_BaseCharacter* BaseCharacter = Cast<AHG_BaseCharacter>(Hit.GetActor()))
+		{
+			if(UHG_DialogComponent* DialogComponent = BaseCharacter->GetDialogComponent())
+			{
+				DialogComponent->OnInteraction_Implementation();
+			}
+		}
 	}
 }
 
