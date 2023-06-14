@@ -5,6 +5,7 @@
 #include "Characters/HG_BaseCharacter.h"
 #include "Components/HG_DialogComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "ToolBox/HG_LogCategories.h"
 
 
 AHG_PlayerController::AHG_PlayerController()
@@ -47,12 +48,11 @@ void AHG_PlayerController::Interact()
 	DrawDebugLine(GetWorld(), Location, End, FColor::Red, true);
 	if(GetWorld()->LineTraceSingleByChannel(Hit, Location, End, ECC_GameTraceChannel1, Params))
 	{
-		if(AHG_BaseCharacter* BaseCharacter = Cast<AHG_BaseCharacter>(Hit.GetActor()))
+		
+		if (UHG_DialogComponent* DialogComponent =
+			Cast<UHG_DialogComponent>(Hit.GetActor()->GetComponentByClass(UHG_DialogComponent::StaticClass())))
 		{
-			if(UHG_DialogComponent* DialogComponent = BaseCharacter->GetDialogComponent())
-			{
-				DialogComponent->OnInteraction_Implementation();
-			}
+			DialogComponent->OnInteraction_Implementation();
 		}
 	}
 }

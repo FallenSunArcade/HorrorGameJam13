@@ -9,6 +9,8 @@
 
 class AAIController;
 class UHG_HudOverlay;
+class UBehaviorTree;
+class UWidgetComponent;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class HGJ13_API UHG_DialogComponent : public UActorComponent, public IHG_Interactable
@@ -19,17 +21,19 @@ public:
 	UHG_DialogComponent();
 	virtual void OnInteraction_Implementation() override;
 
+	UWidgetComponent* GetInteractionWidget() const {return InteractionWidget;}
+	
 protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<UHG_HudOverlay> HudOverlayClass;
+	UPROPERTY(EditAnywhere, Category = "Interaction")
+	UBehaviorTree* DialogTree;
+
+	UPROPERTY(EditAnywhere, Category = "Interaction")
+	UWidgetComponent* InteractionWidget;
 	
 	UPROPERTY()
 	AAIController* AIController;
-	
-	UPROPERTY()
-	UHG_HudOverlay* HudOverlay;
 };
 
