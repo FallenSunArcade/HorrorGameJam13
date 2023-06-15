@@ -14,14 +14,21 @@ class HGJ13_API AHG_ShootingBooth : public AHG_GameBoothBase
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AHG_ShootingBooth();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tent", meta = (AllowPrivateAccess))
+	UStaticMeshComponent* Tent = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tent", meta = (AllowPrivateAccess))
+	UStaticMeshComponent* WoodenFrame = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Track", meta = (AllowPrivateAccess))
+	UStaticMeshComponent* Track = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Track", meta = (AllowPrivateAccess))
+	USplineComponent* SplineComponent = nullptr;
 };
